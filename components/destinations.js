@@ -3,6 +3,8 @@ import {View, Text, StyleSheet, Image} from 'react-native';
 
 import Rating from '../components/rating';
 
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+
 const Destinations = () => {
   return (
     <>
@@ -39,13 +41,11 @@ const DestinationCard = ({
     <View style={styles.destination}>
       <Image source={imageSource} />
       <View style={styles.destinationCard}>
-        <Image
+        <FontAwesome
           style={{position: 'absolute', right: 10, top: 10}}
-          source={
-            like
-              ? require('../assets/images/icons/heartActive.png')
-              : require('../assets/images/icons/heartInactive.png')
-          }
+          name={'heart'}
+          color={like ? '#EB5757' : '#828282'}
+          size={22}
         />
         <View style={styles.destinationCardContent}>
           <Text style={{color: '#FF6E6E'}}>{destinationCountry}</Text>
@@ -55,7 +55,7 @@ const DestinationCard = ({
           <View style={styles.destinationCardContentFooter}>
             <Rating />
             <View style={styles.travelAgentsIcon}>
-              <Image source={require('../assets/images/icons/suitcase.png')} />
+              <FontAwesome name={'suitcase'} color={'#2D9CDB'} size={12} />
             </View>
             <Text style={{color: '#2D9CDB'}}>{travelAgent} travel agents</Text>
           </View>

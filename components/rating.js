@@ -1,12 +1,15 @@
 import React from 'react';
 import {View, Text, Image, StyleSheet} from 'react-native';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const Rating = () => {
   return (
     <View style={styles.rating}>
-      <Image
+      <FontAwesome
         style={{marginRight: 10}}
-        source={require('../assets/images/icons/ant-design_star-filled.png')}
+        name={'star'}
+        size={14}
+        color="#F2994A"
       />
       <Text style={{color: '#F2994A'}}>4.5</Text>
     </View>
