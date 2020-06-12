@@ -26,6 +26,13 @@ const Destinations = () => {
         like={false}
         travelAgent="32"
       />
+      <DestinationCard
+        imageSource={require('../assets/images/destinations/The-great-mountain-of-fujiyama.png')}
+        destinationCountry="Japan"
+        destinationName="The great mountain of fujiyama"
+        like={false}
+        travelAgent="32"
+      />
     </>
   );
 };

@@ -6,7 +6,7 @@ const Rating = () => {
   return (
     <View style={styles.rating}>
       <FontAwesome
-        style={{marginRight: 10}}
+        style={{marginRight: 7}}
         name={'star'}
         size={14}
         color="#F2994A"

@@ -8,7 +8,7 @@ import {ScrollView} from 'react-native-gesture-handler';
 
 const Home = () => {
   return (
-    <View style={{backgroundColor: 'white'}}>
+    <View style={{backgroundColor: '#ffffff'}}>
       <SafeAreaView>
         <ScrollView style={[styles.container]}>
           <View style={HomeStyles.topNavigation}>
