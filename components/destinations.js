@@ -1,11 +1,11 @@
 import React from 'react';
-import {View, Text, StyleSheet, Image} from 'react-native';
+import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 
 import Rating from '../components/rating';
 
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
-const Destinations = () => {
+const Destinations = ({navigation}) => {
   return (
     <>
       <View style={styles.heading}>
@@ -13,6 +13,7 @@ const Destinations = () => {
         <Text style={{color: '#FF6E6E'}}>See all</Text>
       </View>
       <DestinationCard
+        navigation={navigation}
         imageSource={require('../assets/images/destinations/Borobudur-great-temple.png')}
         destinationCountry="Indonesia"
         destinationName="Borobudur great temple"
@@ -20,6 +21,7 @@ const Destinations = () => {
         travelAgent="12"
       />
       <DestinationCard
+        navigation={navigation}
         imageSource={require('../assets/images/destinations/The-great-mountain-of-fujiyama.png')}
         destinationCountry="Japan"
         destinationName="The great mountain of fujiyama"
@@ -27,6 +29,7 @@ const Destinations = () => {
         travelAgent="32"
       />
       <DestinationCard
+        navigation={navigation}
         imageSource={require('../assets/images/destinations/The-great-mountain-of-fujiyama.png')}
         destinationCountry="Japan"
         destinationName="The great mountain of fujiyama"
@@ -43,9 +46,12 @@ const DestinationCard = ({
   destinationName,
   like,
   travelAgent,
+  navigation,
 }) => {
   return (
-    <View style={styles.destination}>
+    <TouchableOpacity
+      onPress={() => navigation.navigate('DestinationDetail')}
+      style={styles.destination}>
       <Image source={imageSource} />
       <View style={styles.destinationCard}>
         <FontAwesome
@@ -68,7 +74,7 @@ const DestinationCard = ({
           </View>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

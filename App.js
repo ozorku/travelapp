@@ -9,78 +9,117 @@
 import React from 'react';
 import {Text, View, StyleSheet} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-
-import Homescreen from './screens/Home';
-
+import {createStackNavigator} from '@react-navigation/stack';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
-const Stack = createStackNavigator();
+// screens
+import HomeScreen from './screens/Home';
+import {TouchableOpacity} from 'react-native-gesture-handler';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import DestinationDetailScreen from './screens/DestinationDetail';
+
+const CalendarScreen = () => {
+  return <Text>Calendar</Text>;
+};
+const CompassScreen = () => {
+  return <Text>Compass</Text>;
+};
+const NotificationScreen = () => {
+  return <Text>Notification</Text>;
+};
+
 const Tab = createBottomTabNavigator();
+
+function HomeTabs() {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen
+        name="DestinationDetail"
+        component={DestinationDetailScreen}
+      />
+    </Tab.Navigator>
+  );
+}
+
+function DestinationDetailTabs() {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen
+        name="DestinationDetail"
+        component={DestinationDetailScreen}
+      />
+    </Tab.Navigator>
+  );
+}
+
+function BottomTabs() {
+  return (
+    <Tab.Navigator
+      screenOptions={({route}) => ({
+        tabBarIcon: ({focused, name, color, size}) => {
+          let iconName;
+
+          if (route.name === 'Home') {
+            iconName = 'home';
+          } else if (route.name === 'Calendar') {
+            iconName = 'calendar';
+          } else if (route.name === 'Compass') {
+            iconName = 'compass';
+          } else if (route.name === 'Notification') {
+            iconName = 'bell';
+          }
+
+          // You can return any component that you like here!
+          return (
+            <View
+              style={{
+                backgroundColor: focused
+                  ? 'rgba(255,110,110,0.24)'
+                  : 'transparent',
+                borderRadius: 12,
+                paddingVertical: 10,
+                paddingHorizontal: 30,
+                flexDirection: 'row',
+              }}>
+              <FontAwesome name={iconName} size={20} color={color} />
+            </View>
+          );
+        },
+      })}
+      tabBarOptions={{
+        activeTintColor: '#FF6E6E',
+        inactiveTintColor: '#aaa',
+        showLabel: false,
+        style: {
+          borderTopWidth: 0,
+          height: 100,
+        },
+      }}>
+      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="Calendar" component={CalendarScreen} />
+      <Tab.Screen name="Compass" component={CompassScreen} />
+      <Tab.Screen name="Notification" component={NotificationScreen} />
+    </Tab.Navigator>
+  );
+}
+
+const Stack = createStackNavigator();
 
 const App = () => {
   return (
     <NavigationContainer>
-      <Tab.Navigator
-        initialRouteName="Splash"
-        screenOptions={({route}) => ({
-          tabBarIcon: ({focused, name, color, size}) => {
-            let iconName;
-
-            if (route.name === 'Home') {
-              iconName = 'home';
-            } else if (route.name === 'Calendar') {
-              iconName = 'calendar';
-            } else if (route.name === 'Compass') {
-              iconName = 'compass';
-            } else if (route.name === 'Notification') {
-              iconName = 'bell';
-            }
-
-            // You can return any component that you like here!
-            return (
-              <View
-                style={{
-                  backgroundColor: focused
-                    ? 'rgba(255,110,110,0.24)'
-                    : 'transparent',
-                  borderRadius: 12,
-                  paddingVertical: 10,
-                  paddingHorizontal: 30,
-                  flexDirection: 'row',
-                }}>
-                <FontAwesome name={iconName} size={20} color={color} />
-              </View>
-            );
-          },
-        })}
-        tabBarOptions={{
-          activeTintColor: '#FF6E6E',
-          inactiveTintColor: '#aaa',
-          showLabel: false,
-          style: {
-            borderTopWidth: 0,
-            height: 100,
-          },
-        }}>
-        <Tab.Screen name="Home" component={Homescreen} />
-        <Tab.Screen name="Calendar" component={Calendar} />
-        <Tab.Screen name="Compass" component={Compass} />
-        <Tab.Screen name="Notification" component={Notification} />
-      </Tab.Navigator>
+      <Stack.Navigator screenOptions={{headerShown: false}}>
+        <Stack.Screen name="Home" component={BottomTabs} />
+        <Stack.Screen
+          name="DestinationDetail"
+          component={DestinationDetailScreen}
+        />
+      </Stack.Navigator>
     </NavigationContainer>
   );
-};
-
-const Calendar = () => {
-  return <Text>Calendar</Text>;
-};
-const Compass = () => {
-  return <Text>Compass</Text>;
-};
-const Notification = () => {
-  return <Text>Notification</Text>;
 };
 
 export default App;

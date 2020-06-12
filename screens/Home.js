@@ -6,7 +6,7 @@ import Continents from '../components/continents';
 import Destinations from '../components/destinations';
 import {ScrollView} from 'react-native-gesture-handler';
 
-const Home = () => {
+const Home = ({navigation}) => {
   return (
     <View style={{backgroundColor: '#ffffff'}}>
       <SafeAreaView>
@@ -25,7 +25,7 @@ const Home = () => {
 
           <Continents />
 
-          <Destinations />
+          <Destinations navigation={navigation} />
         </ScrollView>
       </SafeAreaView>
     </View>
