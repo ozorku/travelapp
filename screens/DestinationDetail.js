@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   Text,
   View,
@@ -18,10 +18,13 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Rating from '../components/rating';
 
 const DestinationDetailScreen = ({navigation}) => {
+  const [readMore, setReadMore] = useState(false);
   return (
     <View style={{backgroundColor: '#ffffff'}}>
       <SafeAreaView>
-        <ScrollView style={[styles.container, {height: '100%'}]}>
+        <ScrollView
+          scrollEnabled={readMore}
+          style={[styles.container, {height: '100%'}]}>
           <ScreenTopNav navigation={navigation} showEllipse={true} title="" />
           <View style={componentStyle.cardStyle}>
             <ImageBackground
@@ -54,7 +57,7 @@ const DestinationDetailScreen = ({navigation}) => {
               marginTop: 25,
               marginBottom: 15,
               fontSize: 24,
-              fontWeight: '500',
+              fontWeight: '400',
               color: '#333333',
             }}>
             Description
@@ -72,6 +75,35 @@ const DestinationDetailScreen = ({navigation}) => {
             walls and balustrades are decorated with fine low{' '}
           </Text>
         </ScrollView>
+
+        <View
+          style={{
+            display: readMore ? 'none' : 'flex',
+            position: 'absolute',
+            backgroundColor: 'white',
+            paddingTop: 20,
+            paddingBottom: 30,
+            bottom: 70,
+            width: '100%',
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
+          <TouchableOpacity
+            onPress={() => setReadMore(true)}
+            style={{
+              borderColor: '#EB5757',
+              borderWidth: 1,
+              width: 150,
+              borderRadius: 6,
+              paddingVertical: 15,
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+            <Text style={{fontSize: 18, color: '#EB5757'}}>Read More</Text>
+          </TouchableOpacity>
+        </View>
         <NextPageNav
           navigation={navigation}
           text="Set the schedule"

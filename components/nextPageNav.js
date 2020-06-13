@@ -11,11 +11,11 @@ const NextPageNav = ({navigation, iconName, text}) => {
         bottom: 0,
         backgroundColor: '#EB5757',
         width: '100%',
-        height: 85,
+        paddingBottom: 30,
+        paddingTop: 20,
         flexDirection: 'row',
         justifyContent: 'center',
         textAlign: 'center',
-        alignItems: 'center',
       }}>
       <Text style={{color: 'white', fontSize: 18}}>{text}</Text>
       <AntDesign
