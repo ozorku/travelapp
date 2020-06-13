@@ -2,10 +2,10 @@ import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
-const NextPageNav = ({navigation, iconName, text}) => {
+const NextPageNav = ({navigation, iconName, text, navigateTo}) => {
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate('setSchedule')}
+      onPress={() => navigation.navigate(navigateTo)}
       style={{
         position: 'absolute',
         bottom: 0,

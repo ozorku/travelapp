@@ -24,9 +24,7 @@ const DestinationDetailScreen = ({navigation}) => {
   return (
     <View style={{backgroundColor: '#ffffff'}}>
       <SafeAreaView>
-        <ScrollView
-          scrollEnabled={readMore}
-          style={[styles.container, {height: '100%'}]}>
+        <ScrollView scrollEnabled={readMore} style={[styles.container]}>
           <ScreenTopNav navigation={navigation} showEllipse={true} title="" />
           <View style={componentStyle.cardStyle}>
             <ImageBackground
@@ -77,13 +75,13 @@ const DestinationDetailScreen = ({navigation}) => {
             <Text style={{fontSize: 18, color: '#EB5757'}}>Read More</Text>
           </TouchableOpacity>
         </LinearGradient>
-
-        <NextPageNav
-          navigation={navigation}
-          text="Set the schedule"
-          iconName="arrowright"
-        />
       </SafeAreaView>
+      <NextPageNav
+        navigateTo="SetSchedule"
+        navigation={navigation}
+        text="Set the schedule"
+        iconName="arrowright"
+      />
     </View>
   );
 };
