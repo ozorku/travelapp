@@ -15,6 +15,8 @@ import NextPageNav from '../components/nextPageNav';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
+import LinearGradient from 'react-native-linear-gradient';
+
 import Rating from '../components/rating';
 
 const DestinationDetailScreen = ({navigation}) => {
@@ -52,22 +54,8 @@ const DestinationDetailScreen = ({navigation}) => {
             <Rating />
             <Text>picturs</Text>
           </View>
-          <Text
-            style={{
-              marginTop: 25,
-              marginBottom: 15,
-              fontSize: 24,
-              fontWeight: '400',
-              color: '#333333',
-            }}>
-            Description
-          </Text>
-          <Text
-            style={{
-              fontSize: 18,
-              color: '#4f4f4f',
-              lineHeight: 30,
-            }}>
+          <Text style={componentStyle.title}>Description</Text>
+          <Text style={componentStyle.summary}>
             This famous Buddhist temple, dating from the 8th and 9th centuries,
             is located in central Java. It was built in three tiers: a pyramidal
             base with five concentric square terraces, the trunk of a cone with
@@ -76,34 +64,20 @@ const DestinationDetailScreen = ({navigation}) => {
           </Text>
         </ScrollView>
 
-        <View
-          style={{
-            display: readMore ? 'none' : 'flex',
-            position: 'absolute',
-            backgroundColor: 'white',
-            paddingTop: 20,
-            paddingBottom: 30,
-            bottom: 70,
-            width: '100%',
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}>
+        <LinearGradient
+          // colors={['#fff', 'transparent']}
+          colors={['transparent', 'rgba(0,0,0,0.1)', 'rgba(0,0,0,0.2)']}
+          style={[
+            componentStyle.readMoreLinearBg,
+            {display: readMore ? 'none' : 'flex'},
+          ]}>
           <TouchableOpacity
             onPress={() => setReadMore(true)}
-            style={{
-              borderColor: '#EB5757',
-              borderWidth: 1,
-              width: 150,
-              borderRadius: 6,
-              paddingVertical: 15,
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}>
+            style={componentStyle.readMoreButton}>
             <Text style={{fontSize: 18, color: '#EB5757'}}>Read More</Text>
           </TouchableOpacity>
-        </View>
+        </LinearGradient>
+
         <NextPageNav
           navigation={navigation}
           text="Set the schedule"
@@ -158,6 +132,39 @@ const componentStyle = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginVertical: 20,
+  },
+  title: {
+    marginTop: 25,
+    marginBottom: 15,
+    fontSize: 24,
+    fontWeight: '400',
+    color: '#333333',
+  },
+  summary: {
+    fontSize: 18,
+    color: '#4f4f4f',
+    lineHeight: 30,
+  },
+  readMoreLinearBg: {
+    paddingTop: 20,
+    paddingBottom: 30,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#fff',
+    position: 'absolute',
+    bottom: 70,
+    width: '100%',
+  },
+  readMoreButton: {
+    borderColor: '#EB5757',
+    borderWidth: 1,
+    width: 150,
+    borderRadius: 6,
+    paddingVertical: 15,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 
