@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, SafeAreaView, ScrollView} from 'react-native';
+import {View, SafeAreaView} from 'react-native';
 import {styles} from '../assets/styles/styles';
 
 import ScreenTopNav from '../components/screenTopNav';

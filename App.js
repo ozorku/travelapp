@@ -19,6 +19,7 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import DestinationDetailScreen from './screens/DestinationDetail';
 import SetScheduleScreen from './screens/SetSchedule';
+import ChooseTravelAgentScreen from './screens/ChooseTravelAgent';
 
 const CalendarScreen = () => {
   return <Text>Calendar</Text>;
@@ -119,6 +120,10 @@ const App = () => {
           component={DestinationDetailScreen}
         />
         <Stack.Screen name="SetSchedule" component={SetScheduleScreen} />
+        <Stack.Screen
+          name="ChooseTravelAgent"
+          component={ChooseTravelAgentScreen}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
