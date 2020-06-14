@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -8,18 +8,93 @@ import {
   Switch,
 } from 'react-native';
 import {styles} from '../assets/styles/styles';
+import DatePicker from 'react-native-date-picker';
+import moment from 'moment';
 
 import ScreenTopNav from '../components/screenTopNav';
 import NextPageNav from '../components/nextPageNav';
 
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import {TouchableOpacity} from 'react-native-gesture-handler';
+
+let dateObj = {
+  day: moment().format('DD'),
+  month: moment().format('MMMM'),
+  year: moment().format('YYYY'),
+};
 
 const SetSchedule = ({navigation}) => {
-  const [homeOption, setHomeOption] = useState(false);
-  const [addressOption, setAddressOption] = useState(false);
+  // set initial date
+  useEffect(() => {
+    setStartDate(dateObj);
+    setEndDate(dateObj);
+  }, []);
+  const [homeOption, setHomeOption] = useState(false); // home option
+  const [addressOption, setAddressOption] = useState(false); // address option
+  const [date, setDate] = useState(new Date()); // date selected date-picker
+  const [showDatePicker, setShowDatePicker] = useState(false); // date picker
+  const [typeSelected, setTypeSelected] = useState(''); // type selected start or end
+  // startdate
+  const [startDate, setStartDate] = useState({
+    day: '',
+    month: '',
+    year: '',
+  });
+  // end dtate
+  const [endDate, setEndDate] = useState({
+    day: '',
+    month: '',
+    year: '',
+  });
+
+  function toggleShowDatePicker(type) {
+    setShowDatePicker(!showDatePicker); // toggle to display/hide date picker
+    setTypeSelected(type); // set type selected start/end
+  }
+
+  function pickDate() {
+    let dateObject = {
+      day: moment(date).format('DD'),
+      month: moment(date).format('MMMM'),
+      year: moment(date).format('YYYY'),
+    };
+    switch (typeSelected) {
+      case 'start':
+        setStartDate(dateObject);
+        break;
+      case 'end':
+        setEndDate(dateObject);
+    }
+    toggleShowDatePicker('');
+  }
 
   return (
     <View style={{backgroundColor: '#ffffff'}}>
+      <View
+        style={[
+          componentStyle.datePicker,
+          {display: showDatePicker ? 'flex' : 'none'},
+        ]}>
+        <DatePicker
+          mode={'date'}
+          date={date}
+          onDateChange={setDate}
+          locale="en"
+        />
+        <TouchableOpacity
+          onPress={() => pickDate()}
+          style={{
+            backgroundColor: '#FF6E6E',
+            paddingVertical: 15,
+            paddingHorizontal: 30,
+            marginTop: 50,
+            borderRadius: 5,
+          }}>
+          <Text style={{color: 'white', fontSize: 18, fontWeight: '500'}}>
+            Pick {typeSelected} Date
+          </Text>
+        </TouchableOpacity>
+      </View>
       <SafeAreaView>
         <View style={[styles.container]}>
           <ScreenTopNav
@@ -27,14 +102,17 @@ const SetSchedule = ({navigation}) => {
             showEllipse={true}
             title="Set the schedule"
           />
-          <View style={{marginTop: 50}}>
+
+          <TouchableOpacity
+            onPress={() => toggleShowDatePicker('start')}
+            style={{marginTop: 50}}>
             <Text>Start</Text>
             <View style={componentStyle.dateContainer}>
               <View style={{flex: 1, marginRight: 30}}>
                 <TextInput
                   editable={false}
                   style={componentStyle.textInput}
-                  value="16"
+                  value={startDate.day}
                 />
                 <Text style={{color: '#828282'}}>Day</Text>
               </View>
@@ -42,7 +120,7 @@ const SetSchedule = ({navigation}) => {
                 <TextInput
                   editable={false}
                   style={componentStyle.textInput}
-                  value="March"
+                  value={startDate.month}
                 />
                 <Text style={{color: '#828282'}}>Month</Text>
               </View>
@@ -50,25 +128,25 @@ const SetSchedule = ({navigation}) => {
                 <TextInput
                   editable={false}
                   style={componentStyle.textInput}
-                  value="2020"
+                  value={startDate.year}
                 />
                 <Text style={{color: '#828282'}}>Year</Text>
               </View>
             </View>
-          </View>
+          </TouchableOpacity>
           <FontAwesome
             name="exchange"
             size={24}
             style={{marginVertical: 25, textAlign: 'center'}}
           />
-          <View>
+          <TouchableOpacity onPress={() => toggleShowDatePicker('end')}>
             <Text>End</Text>
             <View style={componentStyle.dateContainer}>
               <View style={{flex: 1, marginRight: 30}}>
                 <TextInput
                   editable={false}
                   style={componentStyle.textInput}
-                  value="16"
+                  value={endDate.day}
                 />
                 <Text style={{color: '#828282'}}>Day</Text>
               </View>
@@ -76,7 +154,7 @@ const SetSchedule = ({navigation}) => {
                 <TextInput
                   editable={false}
                   style={componentStyle.textInput}
-                  value="March"
+                  value={endDate.month}
                 />
                 <Text style={{color: '#828282'}}>Month</Text>
               </View>
@@ -84,12 +162,12 @@ const SetSchedule = ({navigation}) => {
                 <TextInput
                   editable={false}
                   style={componentStyle.textInput}
-                  value="2020"
+                  value={endDate.year}
                 />
                 <Text style={{color: '#828282'}}>Year</Text>
               </View>
             </View>
-          </View>
+          </TouchableOpacity>
 
           <View style={componentStyle.pickupOptions}>
             <View style={componentStyle.pickupOption}>
@@ -128,6 +206,18 @@ const SetSchedule = ({navigation}) => {
 };
 
 const componentStyle = StyleSheet.create({
+  datePicker: {
+    position: 'absolute',
+    backgroundColor: 'white',
+    width: '100%',
+    left: 0,
+    top: 0,
+    zIndex: 3,
+    height: '100%',
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   textInput: {
     borderColor: '#BDBDBD',
     borderBottomWidth: 1,
