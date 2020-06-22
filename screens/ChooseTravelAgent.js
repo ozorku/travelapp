@@ -1,5 +1,12 @@
 import React from 'react';
-import {View, SafeAreaView, ScrollView, Text, Image} from 'react-native';
+import {
+  View,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  Image,
+} from 'react-native';
 import {styles} from '../assets/styles/styles';
 
 import ScreenTopNav from '../components/screenTopNav';
@@ -7,27 +14,14 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 
 const TravelAgentCard = () => {
   return (
-    <TouchableOpacity
-      style={{
-        flexDirection: 'row',
-        backgroundColor: 'white',
-        marginTop: 20,
-        padding: 20,
-        borderRadius: 20,
-      }}>
+    <TouchableOpacity style={componentStyle.travelAgentCard}>
       <View style={{width: '32%'}}>
         <Image
           source={require('../assets/images/destinations/The-great-mountain-of-fujiyama.png')}
           alt="image"
         />
       </View>
-      <View
-        style={{
-          marginLeft: 20,
-          flexDirection: 'column',
-          justifyContent: 'space-between',
-          width: '68%',
-        }}>
+      <View style={componentStyle.travelAgentCardRight}>
         <Text style={{fontSize: 20, fontWeight: '500', color: '#333'}}>
           Barokah international tour & travel
         </Text>
@@ -72,18 +66,9 @@ const ChooseTravelAgent = ({navigation}) => {
               <Text style={{paddingVertical: 10}}>
                 Showing 12 travel agents
               </Text>
-              <Text
-                style={{
-                  borderColor: '#FF6E6E',
-                  color: '#FF6E6E',
-                  borderWidth: 1,
-                  borderRadius: 5,
-                  paddingHorizontal: 20,
-                  fontSize: 12,
-                  paddingVertical: 10,
-                }}>
-                Filter
-              </Text>
+              <TouchableOpacity>
+                <Text style={componentStyle.filterButton}>Filter</Text>
+              </TouchableOpacity>
             </View>
           </View>
           <View style={styles.container}>
@@ -102,5 +87,30 @@ const ChooseTravelAgent = ({navigation}) => {
     </View>
   );
 };
+
+const componentStyle = StyleSheet.create({
+  travelAgentCard: {
+    flexDirection: 'row',
+    backgroundColor: 'white',
+    marginTop: 20,
+    padding: 20,
+    borderRadius: 20,
+  },
+  travelAgentCardRight: {
+    marginLeft: 20,
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    width: '68%',
+  },
+  filterButton: {
+    borderColor: '#FF6E6E',
+    color: '#FF6E6E',
+    borderWidth: 1,
+    borderRadius: 5,
+    paddingHorizontal: 20,
+    fontSize: 12,
+    paddingVertical: 10,
+  },
+});
 
 export default ChooseTravelAgent;
