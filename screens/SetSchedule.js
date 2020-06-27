@@ -29,7 +29,7 @@ const SetSchedule = ({navigation}) => {
     setStartDate(dateObj);
     setEndDate(dateObj);
   }, []);
-  const [homeOption, setHomeOption] = useState(false); // home option
+  const [homeOption, setHomeOption] = useState(true); // home option
   const [addressOption, setAddressOption] = useState(false); // address option
   const [date, setDate] = useState(new Date()); // date selected date-picker
   const [showDatePicker, setShowDatePicker] = useState(false); // date picker
@@ -177,7 +177,10 @@ const SetSchedule = ({navigation}) => {
               <Switch
                 trackColor={{false: '#E0E0E0', true: '#E0E0E0'}}
                 thumbColor={homeOption ? '#FF6E6E' : '#828282'}
-                onValueChange={() => setHomeOption(!homeOption)}
+                onValueChange={() => {
+                  setHomeOption(!homeOption);
+                  setAddressOption(!addressOption);
+                }}
                 value={homeOption}
               />
             </View>
@@ -188,7 +191,10 @@ const SetSchedule = ({navigation}) => {
               <Switch
                 trackColor={{false: '#E0E0E0', true: '#E0E0E0'}}
                 thumbColor={addressOption ? '#FF6E6E' : '#828282'}
-                onValueChange={() => setAddressOption(!addressOption)}
+                onValueChange={() => {
+                  setAddressOption(!addressOption);
+                  setHomeOption(!homeOption);
+                }}
                 value={addressOption}
               />
             </View>
