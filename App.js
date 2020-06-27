@@ -20,6 +20,8 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import DestinationDetailScreen from './screens/DestinationDetail';
 import SetScheduleScreen from './screens/SetSchedule';
 import ChooseTravelAgentScreen from './screens/ChooseTravelAgent';
+import PaymentScreen from './screens/Payment';
+import CheckoutScreen from './screens/Checkout';
 
 const CalendarScreen = () => {
   return <Text>Calendar</Text>;
@@ -124,6 +126,8 @@ const App = () => {
           name="ChooseTravelAgent"
           component={ChooseTravelAgentScreen}
         />
+        <Stack.Screen name="Payment" component={PaymentScreen} />
+        <Stack.Screen name="Checkout" component={CheckoutScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
