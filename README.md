@@ -1,3 +1,7 @@
+## TRVL
+
+App for travel bookings. built with Javascript & React-native
+
 # Demo
 
 ![](preview.gif)
